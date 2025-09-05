@@ -7,13 +7,13 @@ Un Tetris avec Pygame.
 Ce code est basee sur le code de Sébastien CHAZALLET, auteur du livre "Python 3, les fondamentaux du language"
 """
 
-__author__ = "votre nom"
+__author__ = "LACROIX Wyatt"
 __copyright__ = "Copyright 2022"
-__credits__ = ["Sébastien CHAZALLET", "Vincent NGUYEN", "votre nom"]
+__credits__ = ["Sébastien CHAZALLET", "Vincent NGUYEN", "Wyatt LACROIX"]
 __license__ = "GPL"
 __version__ = "1.0"
-__maintainer__ = "votre nom"
-__email__ = "votre email"
+__maintainer__ = "Wyatt LACROIX"
+__email__ = "wyatt.lacroix@etu.univ-orleans.fr"
 
 # Probleme de l'ordre des imports
 from pygame.locals import *
@@ -99,7 +99,7 @@ PIECES_KEYS = list(PIECES.keys())
 # Classe Tetris
 class Jeu:
 	"""
-	[Il manque la documentation de la classe]
+	Initialisation de la classe
 	"""
 	def __init__(self):
 		pygame.init()
@@ -111,6 +111,8 @@ class Jeu:
 		}
 		pygame.display.set_caption('Application Tetris')
 
+	
+	"""Démarrage et arrêt du jeu"""
 	def start(self):
 		self._afficherTexte('Tetris', CENTRE_FENETRE, font = 'titre')
 		self._afficherTexte('Appuyer sur une touche...', POS)
@@ -120,6 +122,7 @@ class Jeu:
 		self._afficherTexte('Perdu', CENTRE_FENETRE, font='titre')
 		self._attente()
 		self._quitter()
+
 
 	def _afficherTexte(self, text, position, couleur=9, font='defaut'):
 #		print("Afficher Texte")
@@ -141,10 +144,12 @@ class Jeu:
 					continue
 				return event.key
 				
+	"""Quitter le jeu"""
 	def _quitter(self):
 		print("Quitter")
 		pygame.quit()
 		sys.exit()
+		
 	def _rendre(self):
 		pygame.display.update()
 		self.clock.tick()
