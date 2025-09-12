@@ -93,11 +93,11 @@ class Jeu:
     def get_piece(self):
         return PIECES.get(random.choice(PIECES_KEYS))
 
-    def get_current_piece_color(self): # to del, previously row was l and cell was c
+    def get_current_piece_color(self):
         for row in self.current[0]:
-            for cell in row:
-                if cell != 0:
-                    return cell
+            for color in row:
+                if color != 0:
+                    return color
         return 0
 
     def calculer_donnes_piece_courante(self):
