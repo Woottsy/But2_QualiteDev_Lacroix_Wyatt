@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-'''
+"""
 [Ce bloc est la documentation du module]
 Un Tetris avec Pygame.
 Ce code est basee sur le code de Sébastien CHAZALLET,
 auteur du livre 'Python 3, les fondamentaux du language'
-'''
+"""
 
 __author__ = 'LACROIX Wyatt'
 __copyright__ = 'Copyright 2022'
@@ -29,9 +29,8 @@ from constantes import *
 
 # Classe Tetris
 class Jeu:
-	"""Initialisation de la classe"""
-	
-
+    """La classe du jeu
+    """
     def __init__(self):
         """la méthode pour intialiser avec pygame"""
         pygame.init()
@@ -56,12 +55,13 @@ class Jeu:
         self._quitter()
 
     def afficher_texte(self, text, position, couleur=9, font='defaut'):
-      """Affiche le texte a une position donnée
+        """Affiche le texte a une position donnée
 
         Args:
             text (str): le texte a afficher
             position (tuple[int,int]): la position choisie pour afficher le texte
-            couleur (int, optional): une des couleurs proposée dans le fichier constantes.py. Defaults to 9.
+            couleur (int, optional): une des couleurs proposée dans le 
+            fichier constantes.py. Defaults to 9.
             font (str, optional): le style du texte. Defaults to 'defaut'."""
         #		print('Afficher Texte')
         font = self.fonts.get(font, self.fonts['defaut'])
@@ -69,11 +69,12 @@ class Jeu:
         rendu = font.render(text, True, couleur)
         rectangle = rendu.get_rect() # get_rect() is used to obtain a rectangle object
         rectangle.center = position
-        self.surface.blit(rendu, rectangle)  #blit() put content of rendu on surface at the position given by rectangle 
+        self.surface.blit(rendu, rectangle)
+        #blit() put content of rendu on surface at the position given by rectangle
 
 
     def _get_event(self):
-    """détecte les actions (événements) de l'utilisateur"""
+        """détecte les actions (événements) de l'utilisateur"""
         for event in pygame.event.get():
             if event.type == QUIT:
                 self.quitter()
@@ -87,7 +88,7 @@ class Jeu:
 
 
     def _quitter(self):
-    """la fonction pour quitter le jeu"""
+        """la fonction pour quitter le jeu"""
         print('Quitter')
         pygame.quit()
         sys.exit()
@@ -100,14 +101,14 @@ class Jeu:
 
 
     def _attente(self):
-    """tant que l'utilisateur ne fait rien, on appelle render()
+        """tant que l'utilisateur ne fait rien, on appelle render()
         """
         print('Attente')
         while self._get_event() is None:
-            self._rendre()
+            self.render()
 
     def _get_piece(self):
-      """recupérer une pièce de façon aléatoire
+        """recupérer une pièce de façon aléatoire
 
         Returns:
             piece: la pièce récuperée
@@ -115,11 +116,11 @@ class Jeu:
         return PIECES.get(random.choice(PIECES_KEYS))
 
     def _get_current_piece_color(self):
-      """récupère la couleur de la pièce acutelle
+        """récupère la couleur de la pièce actuelle
 
         Returns:
             color: la couleur de la pièce actuelle
-        """
+            """
         for l in self.current[0]:
             for c in l:
                 if c != 0:
@@ -138,7 +139,7 @@ class Jeu:
 
 
     def _est_valide(self, x=0, y=0, r=0):
-            """vérifie si la position et rotation de la piece est valide
+        """vérifie si la position et rotation de la piece est valide
 
         Args:
             x (int, optional): la position x. Defaults to 0.
@@ -179,8 +180,7 @@ class Jeu:
 
 
     def _poser_piece(self):
-            """pose une piece sur le plateau
-        """
+        """pose une piece sur le plateau"""
         print('La pièce est posée')
         if self.position[1] <= 0:
             self.perdu = True
@@ -221,8 +221,7 @@ class Jeu:
         self.current, self.next, self.perdu = None, self._get_piece(), False
 
     def _next(self):
-              """récupère la pièce suivante
-        """
+        """récupère la pièce suivante"""
         print('Piece suivante')
         self.current, self.next = self.next, self._get_piece()
         self.pieces += 1
@@ -231,8 +230,7 @@ class Jeu:
         self.dernier_mouvement = self.derniere_chute = time.time()
 
     def _gerer_evenements(self):
-              """gère les évènements de l'utilisateur
-        """
+        """gère les évènements de l'utilisateur"""
         event = self._get_event()
         if event == K_p:
             print('Pause')
@@ -268,8 +266,7 @@ class Jeu:
         self._calculer_donnees_piece_courante()
 
     def _vitesse_chute(self):
-              """vitesse de chute des pièces
-        """
+        """vitesse de chute des pièces"""
         if time.time() - self.derniere_chute > 0.35:
             self.derniere_chute = time.time()
             if not self._est_valide():
